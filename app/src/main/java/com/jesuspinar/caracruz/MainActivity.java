@@ -1,5 +1,6 @@
 package com.jesuspinar.caracruz;
 
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -21,8 +22,15 @@ public class MainActivity extends AppCompatActivity {
         Button btnHead =  findViewById(R.id.btnHead);
         Button btnTail =  findViewById(R.id.btnTail);
 
-        btnHead.setOnClickListener(v -> initGame(true));
-        btnTail.setOnClickListener(v -> initGame(false));
+        btnHead.setOnClickListener(v -> {
+            initGame(true);
+            waitResetResult();
+        });
+        btnTail.setOnClickListener(v -> {
+            initGame(false);
+            waitResetResult();
+
+        });
     }
 
     private void initGame(boolean isHead) {
@@ -46,9 +54,6 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this,getString(R.string.loseText), Toast.LENGTH_SHORT).show();
             displayText(false);
         }
-
-        //Reset result
-        resetResult();
     }
     public int random(int min, int max){
         Random r = new Random();
@@ -65,7 +70,14 @@ public class MainActivity extends AppCompatActivity {
         tvResult.setVisibility(View.VISIBLE);
     }
 
-    private void resetResult() {
-        //TODO:
+    private void waitResetResult() {
+        Handler handler = new Handler();
+        handler.postDelayed((Runnable) () -> {
+            TextView tvResult = findViewById(R.id.tvResult);
+            tvResult.setText(getString(R.string.demoText));
+            tvResult.setVisibility(View.INVISIBLE);
+
+            imageView.setImageResource(R.drawable.question);
+        }, 3100);
     }
 }
