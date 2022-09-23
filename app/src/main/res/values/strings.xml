@@ -5,4 +5,5 @@
     <string name="loseText">You lose</string>
     <string name="headBtn">HEADS</string>
     <string name="tailBtn">TAILS</string>
+    <string name="demoText">this is hidden</string>
 </resources>
