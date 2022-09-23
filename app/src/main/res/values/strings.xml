@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Heads or Tails</string>
+    <string name="description">Make a decision</string>
+    <string name="winText">Nice play! You win</string>
+    <string name="loseText">You lose</string>
+    <string name="headBtn">HEADS</string>
+    <string name="tailBtn">TAILS</string>
+</resources>
