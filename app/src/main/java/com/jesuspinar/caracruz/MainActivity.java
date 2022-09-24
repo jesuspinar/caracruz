@@ -13,14 +13,16 @@ import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
     ImageView imageView;
+    Button btnHead;
+    Button btnTail;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         imageView = findViewById(R.id.imageView);
-        Button btnHead =  findViewById(R.id.btnHead);
-        Button btnTail =  findViewById(R.id.btnTail);
+        btnHead = findViewById(R.id.btnHead);
+        btnTail = findViewById(R.id.btnTail);
 
         btnHead.setOnClickListener(v -> {
             initGame(true);
@@ -42,8 +44,7 @@ public class MainActivity extends AppCompatActivity {
         }else{
             imageView.setImageResource(R.drawable.euro_cruz);
         }
-
-        //Filter 0 head 1 tail
+        //Filter 0 head, 1 tail
         if(isHead && rNum == 0){
             Toast.makeText(this,getString(R.string.winText), Toast.LENGTH_SHORT).show();
             displayText(true);
@@ -71,13 +72,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void waitResetResult() {
+        // Block buttons action util handler
+        btnHead.setVisibility(View.GONE);
+        btnTail.setVisibility(View.GONE);
         Handler handler = new Handler();
         handler.postDelayed((Runnable) () -> {
+            //Hides results
             TextView tvResult = findViewById(R.id.tvResult);
             tvResult.setText(getString(R.string.demoText));
             tvResult.setVisibility(View.INVISIBLE);
-
+            //Resets img
             imageView.setImageResource(R.drawable.question);
+            //Activate buttons
+            btnHead.setVisibility(View.VISIBLE);
+            btnTail.setVisibility(View.VISIBLE);
         }, 3100);
     }
 }
